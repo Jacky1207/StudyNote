@@ -1,8 +1,25 @@
 # Lighttpd + fastcgi
  
 ## 编译
-### 1. lighttpd-1.4.59
-### 2. fastcgi
+### 1、pcre-8.44
+~~~sh
+./configure --host=aarch64-himix100-linux prefix=/home/workspace/third_lib/libpcre_arm
+~~~
+
+**<font color=red>--host=aarch64-himix100-linux</font>**这里的配置如果改成--host=arm CC=xxx，会导致只能编译静态库，无法生成动态库
+### 2、openssl-1.1.1d
+~~~sh
+./config shared no-async no-asm --prefix=$(pwd)/../openssl_arm --cross-compile-prefix=aarch64-himix100-linux-
+
+#还需要屏蔽Makefile中 -m64 的选项
+#CNF_CFLAGS=-pthread -m64
+#CNF_CXXFLAGS=-std=c++11 -pthread -m64
+~~~
+### 3. lighttpd-1.4.59
+~~~sh
+./configure --prefix=/home/workspace/third_lib/lighttpd_arm --with-openssl --with-openssl-includes=/home/workspace/third_lib/openssl_arm/include --with-openssl-libs=/home/workspace/third_lib/openssl_arm/lib --with-pcre --host=aarch64-himix100-linux PCRECONFIG=/home/workspace/third_lib/libpcre_arm/bin/pcre-config --without-zlib
+~~~
+### 3. fastcgi
 #### 1、 fcgi
 C语言版本的fastcgi库
 #### 2、 fastcfipp
@@ -631,26 +648,39 @@ echo "gd001:123456" > /app/lighttpd/.lighttpd.user
 
 server.modules += ( "mod_auth" )
 
-auth.backend                 = "plain"
-auth.backend.plain.userfile  = "/app/uiapp/lighttpd/lighttpd.user"
-#auth.backend.plain.groupfile = "/etc/lighttpd/lighttpd.group"
+#server.modules += ( "mod_authn_file" )
+#auth.backend                 = "htpasswd"
+#auth.backend                   = "plain"
+auth.backend                    = "htdigest"
+#auth.backend.plain.userfile  = "/home/workspace/tmp/lighttpd/.lighttpd.plain"
+auth.backend.htdigest.userfile  = "/home/workspace/tmp/lighttpd/.lighttpd.user"
 
+#server.modules += ( "mod_authn_ldap" )
+#auth.backend               = "ldap"
 #auth.backend.ldap.hostname = "localhost"
 #auth.backend.ldap.base-dn  = "dc=my-domain,dc=com"
 #auth.backend.ldap.filter   = "(uid=$)"
 
-auth.require               = ( "/server-status" =>
+auth.require               = ( "/echo.fcgi" =>
                                (
-                                 "method"  => "basic",
-                                 "realm"   => "Server Status",
-                                 "require" => "user=gd001|user=gd002"
+                                 #"method"  => "basic",
+                                 "method"  => "digest",
+                                 "realm"   => "Server",
+                                 "require" => "user=gd001|user=gd002",
                                ),
                              )
-
 ##
 #######################################################################
 ~~~
-### 2、使用
+### 2、生成
+
+~~~sh
+#auth.sh
+printf "%s:%s:%s\n" "$1" "Server" "$(printf "%s" "$1:Server:$2" | md5sum | awk '{print $1}')" > .lighttpd.user
+~~~
+    ./auth.sh gd001 123456
+    gd001:Server:1096ac864338a60557afb3c61190e51d
+
 
 ## 运行
 ~~~
