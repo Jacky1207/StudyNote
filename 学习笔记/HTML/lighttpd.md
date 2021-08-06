@@ -6,7 +6,7 @@
 ./configure --host=aarch64-himix100-linux prefix=/home/workspace/third_lib/libpcre_arm
 ~~~
 
-**<font color=red>--host=aarch64-himix100-linux</font>**这里的配置如果改成--host=arm CC=xxx，会导致只能编译静态库，无法生成动态库
+<font color=red>**--host=aarch64-himix100-linux**</font>这里的配置如果改成--host=arm CC=xxx，会导致只能编译静态库，无法生成动态库
 ### 2、openssl-1.1.1d
 ~~~sh
 ./config shared no-async no-asm --prefix=$(pwd)/../openssl_arm --cross-compile-prefix=aarch64-himix100-linux-
