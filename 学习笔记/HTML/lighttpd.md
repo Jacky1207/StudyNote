@@ -101,7 +101,7 @@ kill-signal：默认的话，在停止FastCGI进程时，lighttpd会发送SIGTER
                 "socket" => "/app/sd/fastcgi.socket",
                 #"host" => "127.0.0.1",     //用于分布式部署，可以指定其他服务器IP
                 #"port" => 9000,                         
-                "bin-path" => "/app/sd/cgi/echo.fcgi",
+                "bin-path" => "/app/uiapp/lighttpd/echo.fcgi",
                 "max-procs" => 1,                                               
                 "check_local" => "disable",
             ),                 
@@ -126,7 +126,7 @@ kill-signal：默认的话，在停止FastCGI进程时，lighttpd会发送SIGTER
 ## chroot example aswell.
 ##
 var.log_root    = "/app/private/lighttpd"
-var.server_root = "/app/sd/"
+var.server_root = "/app/uiapp/lighttpd"
 var.state_dir   = "/app/uiapp/lighttpd"
 var.home_dir    = "/app/uiapp/lighttpd"
 var.conf_dir    = "/app/uiapp/lighttpd/conf"
@@ -653,7 +653,7 @@ server.modules += ( "mod_auth" )
 #auth.backend                   = "plain"
 auth.backend                    = "htdigest"
 #auth.backend.plain.userfile  = "/home/workspace/tmp/lighttpd/.lighttpd.plain"
-auth.backend.htdigest.userfile  = "/home/workspace/tmp/lighttpd/.lighttpd.user"
+auth.backend.htdigest.userfile  = "/app/uiapp/lighttpd/.lighttpd.user"
 
 #server.modules += ( "mod_authn_ldap" )
 #auth.backend               = "ldap"
@@ -684,7 +684,7 @@ printf "%s:%s:%s\n" "$1" "Server" "$(printf "%s" "$1:Server:$2" | md5sum | awk '
 
 ## 运行
 ~~~
-/lighttpd/sbin/lighttpd -f /lighttpd/conf/lighttpd.conf -m /lighttpd/conf/lib
+/lighttpd/sbin/lighttpd -f /lighttpd/config/lighttpd.conf -m /lighttpd/lib
 ~~~
 启动后可以看error.log日志:
 
@@ -696,5 +696,30 @@ printf "%s:%s:%s\n" "$1" "Server" "$(printf "%s" "$1:Server:$2" | md5sum | awk '
 
 ## 访问
 ~~~
-http://192.168.1.15:80/echo.fcgi?
+http://192.168.1.15
 ~~~
+
+## 问题记录
+
+### 1、404 错误
+登陆时抓包返回404 file not found。
+
+问题原因： 找不到fcgi程序。
+
+<font color=red>在fastcgi.conf文件中定义了fcgi路径（"bin-path" => "/app/uiapp/lighttpd/echo.fcgi"）,运行服务器后也可以看到cgi程序正常运行。
+
+    1677 root       0:00 ./lighttpd/sbin/lighttpd -f ./lighttpd/config/lighttpd.co
+    1678 root       0:00 /app/uiapp/lighttpd/echo.fcgi
+
+为什么会提示找不到文件呢，原来在lighttpd.conf中配置了
+
+    #server_root=/app/uiapp/lighttpd
+    server.document-root = server_root + "/www/"
+
+测试发现，只需要在www目录下新建一个echo.fcgi同名的文件即可正常访问。
+</font>
+
+### 2、501 Internal error
+访问cgi时报错。这种情况多半是cgi程序崩溃。可以单独运行cgi程序测试
+
+    gdb ./echo.fcgi
