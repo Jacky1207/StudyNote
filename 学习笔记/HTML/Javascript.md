@@ -27,5 +27,20 @@ $('#datetime').blur(function(){
     getSystemTime();
 });
 ~~~
-    focus 获取焦点事件
+    focus 获取焦点事件 
     blur 失去焦点事件
+
+
+### 页面跳转问题
+
+~~~js
+top.window.location = 'main.html';
+window.location.herf = 'main.html';
+~~~
+上面两句跳转指令在不同浏览器中存在兼容问题。google浏览器可以正常跳转，火狐就不能正常跳转。
+需要额外添加一句
+
+~~~js
+    top.window.location = 'main.html';
+    window.event.returnValue=false;
+~~~

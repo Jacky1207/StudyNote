@@ -55,7 +55,7 @@ fastcgi.map-extensions = ( ".php3" => ".php", ".php4" => ".php" )
     fastcgi.server的结构语法如下：  
 
     ( <extension> =>
-    ( [ <name> => ]
+    ( [ <name> => ]/
     ( # Be careful: lighty does *not* warn you if it doesn't know a specified option here (make sure you have no typos)
       "host" => <string> ,
       "port" => <integer> ,

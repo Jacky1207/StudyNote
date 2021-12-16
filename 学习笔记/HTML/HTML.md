@@ -21,3 +21,10 @@ min属性表示最小值、max表示最大值。（input类型必须是number）
 | max | 日期或时间的最大值 |
 | step | 步长。不同的类型有不同的缺省步长<br>* Date – 缺省是1天<br>* Week – 缺省是1周<br>* Month – 缺省是1月<br>* Time – 缺省是1分钟<br>* DateTime – 缺省是1分钟<br>* Local DateTime – 缺省是1分钟 |
 |||
+
+### 2、乱码问题
+
+需要在<head>中加入以下一句
+~~~html
+	<meta charset="UTF-8">
+~~~
