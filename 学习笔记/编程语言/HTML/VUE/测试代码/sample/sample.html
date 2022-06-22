@@ -1,0 +1,29 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Vue 测试实例</title>
+	<script src="vue.min.js"></script>
+</head>
+<body>
+	<div id="vue_det">
+		<h1>site : {{site}}</h1>
+		<h1>{{details()}}</h1>
+	</div>
+	<script type="text/javascript">
+		var vm = new Vue({
+			el: '#vue_det',
+			data: {
+				site: "菜鸟教程",
+				alexa: "10000"
+			},
+			methods: {
+				details: function() {
+					return  this.site + " - 学的不仅是技术，更是梦想！";
+				}
+			}
+        })
+        
+        vm.$site = "Runoob";
+	</script>
+</body>
+</html>
