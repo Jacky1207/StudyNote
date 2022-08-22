@@ -1,3 +1,10 @@
+<!--
+ * @Author: Jacky
+ * @Date: 2022-05-19 15:20:21
+ * @LastEditors: Jacky
+ * @LastEditTime: 2022-08-22 11:52:29
+ * @FilePath: \StudyNote\VSCode.md
+-->
 # vscode 使用记录
 ## 1、代码注释koro1FileHeader
 
@@ -25,3 +32,16 @@
 'grassHorse2', // 草泥马2 
 'totemBat', // 蝙蝠
 ~~~
+
+## 2、插件
+
+### 2.1 C/C++ GNU Global
+解决函数、参数跳转缓慢或无法跳转的问题。
+
+- 下载 gnuGlobal windows版
+- 配置json文件
+
+"gnuGlobal.globalExecutable": "D:\Program Files\glo665wb\bin\global.exe",
+"gnuGlobal.gtagsExecutable": "D:\Program Files\glo665wb\bin\gtags.exe",
+
+- Ctrl+Shift+P 运行  Global:Rebuild Gtags Database
