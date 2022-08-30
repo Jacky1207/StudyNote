@@ -196,24 +196,19 @@ title可加可不加
 刘备|哭|大哥
 关羽|打|二哥
 张飞|骂|三弟
-效果如下：
 
-姓名	技能	排行
-刘备	哭	大哥
-关羽	打	二哥
-张飞	骂	三弟
-九、代码
+## 九、代码
 语法：
 单行代码：代码之间分别用一个反引号包起来
 
     `代码内容`
 代码块：代码之间分别用三个反引号包起来，且两边的反引号单独占一行
 
-(```)
+```
   代码...
   代码...
   代码...
-(```)
+```
 注：为了防止转译，前后三个反引号处加了小括号，实际是没有的。这里只是用来演示，实际中去掉两边小括号即可。
 
 示例：
@@ -224,31 +219,38 @@ title可加可不加
 
 代码块
 
-(```)
+```
     function fun(){
          echo "这是一句非常牛逼的代码";
     }
     fun();
-(```)
-效果如下：
+```
 
 单行代码
 
 create database hero;
 
-代码块
 
-function fun(){
-  echo "这是一句非常牛逼的代码";
+## 十、流程图
+
+```mermaid
+graph LR;  
+　　A-->B;    
+　　A-->C;  
+　　B-->D;  
+　　C-->D;
+```
+
+```mermaid
+classDiagram
+class Dummy {
+  String data
+  void methods()
 }
-fun();
-十、流程图
-```flow
-st=>start: 开始
-op=>operation: My Operation
-cond=>condition: Yes or No?
-e=>end
-st->op->cond
-cond(yes)->e
-cond(no)->op
-&```
+
+class Flight {
+   flightNumber : Integer
+   departureTime : Date
+}
+```
+

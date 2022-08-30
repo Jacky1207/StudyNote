@@ -2,7 +2,7 @@
  * @Author: Jacky
  * @Date: 2022-05-19 15:20:21
  * @LastEditors: Jacky
- * @LastEditTime: 2022-08-22 11:52:29
+ * @LastEditTime: 2022-08-22 13:37:14
  * @FilePath: \StudyNote\VSCode.md
 -->
 # vscode 使用记录
@@ -23,7 +23,7 @@
 'belle', // 美女
 'coderSong', // 程序员之歌
 'loitumaGirl', // 甩葱少女
-'keyboardAll', // 全键盘
+'keyboardAll', // 全键盘 
 'keyboardSmall', // 小键盘
 'totemWestDragon', // 喷火龙
 'jesus', // 耶稣
