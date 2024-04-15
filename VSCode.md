@@ -45,3 +45,16 @@
 "gnuGlobal.gtagsExecutable": "D:\Program Files\glo665wb\bin\gtags.exe",
 
 - Ctrl+Shift+P 运行  Global:Rebuild Gtags Database
+
+
+## 3、XHR failed
+安装插件时报错，进入开发者选项查看 Failed to load resource: net::ERR_CERT_AUTHORITY_INVAL_ID
+
+重新安装vscode 还是存在。
+
+解决思路：
+上述错误的意思是证书无效，尝试直接在google浏览器打开 : https://marketplace.visualstudio.com 可以看到左上角有一个红色的按钮，
+显示网站不安全。
+
+点击进入，显示证书无效。在证书路径中查看，显示信息是没有添加到 ##受信任的根证书颁发机构## ，问题就很明显了，因为vscode的
+商店并不在受信任的证书里面，所以访问被拒绝了。然后就是导出 https://marketplace.visualstudio.com 这个网站的证书，在导入到本地根证书中。就可以了
