@@ -1,0 +1,88 @@
+{
+    "files.exclude": {
+        "**/.*/**": true,
+        "**/*.d/**": true,
+        "**/*.o/**": true,
+        "**/big-little/**": true,
+        "**/liteos/**": true
+    },
+    "explorer.confirmDelete": false,
+    "editor.renameOnType": true,
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "workbench.editorAssociations": [
+        {
+            "viewType": "default",
+            "filenamePattern": "*.db"
+        }
+    ],
+    "explorer.confirmDragAndDrop": false,
+    "fileheader.cursorMode": {
+        "author": "Jacky",
+        "description": "",
+        "function": "",
+        "param": "",
+        "return": ""
+    },
+    "fileheader.configObj": {
+        // 可以在本文档搜索配置查看相关介绍
+        "designAddHead": true, // 默认关闭, 生成的图案注释是否附带头部注释
+        "headDesignName": "buddhalImg" // 默认为随机图案 生成哪个注释图案
+    },
+    "fileheader.customMade": {
+        "Author": "Jacky",
+        "Date": "Do not edit",
+        "LastEditors": "Jacky", // 文件最后编辑者
+        "LastEditTime": "Do not edit", // 文件最后编辑时间
+        "FilePath": "Do not edit", // 增加此项配置即可
+    },
+    "C_Cpp.default.enableConfigurationSquiggles": false,
+    "gnuGlobal.globalExecutable": "D:\\Program Files\\global\\bin\\global.exe",
+    "gnuGlobal.gtagsExecutable": "D:\\Program Files\\global\\bin\\gtags.exe",
+    "gnuGlobal.completion": "Disabled",
+    "gnuGlobal.autoUpdate": "Enabled",
+    "editor.suggestFontSize": 15,
+
+    "search.followSymlinks": false,
+    "editor.minimap.enabled": false,
+    "explorer.openEditors.visible": 0,
+    "workbench.colorTheme": "Atom One Light",
+    "workbench.colorCustomizations": {
+        "[Atom One Light]": {
+            "editor.background": "#b3f0bd",
+            "sideBar.background": "#C7EDCC",
+            "activityBar.background": "#d5ecd8",
+            "tab.inactiveBackground": "#e8fafa",
+            "tab.activeBackground" :"#c8f3f3",
+        },
+    },
+    "editor.tokenColorCustomizations": {
+        "[Atom One Light]": {
+            "comments": "#727574", // 注释
+            "keywords": "#c719c7", // 关键字
+            "variables": "#181bad", // 变量名
+            "strings": "#0515a5bd", // 字符串
+            "functions": "#be0707c9", // 函数名
+            "numbers": "#AE81FF", // 数字,
+            "types": "#a800b8",
+            "textMateRules": [
+                {
+                  "scope": [ "keyword" ],
+                  "settings": { "fontStyle": "italic" }
+                },
+                {
+                    //变量定义，赋值时
+                    "scope": [
+                      "variable.parameter",
+                      "variable.other.declaration",
+                    ],
+                    "settings": {
+                      "foreground": "#d37a26",
+                      "fontStyle": "bold"
+                    }
+                  },
+            ]
+        },
+    },
+}
